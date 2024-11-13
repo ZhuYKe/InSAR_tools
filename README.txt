@@ -1,13 +1,15 @@
 # 项目介绍
+InSAR数据处理中用到的一些自制工具、其中使用形变量txt生成shp工具和根据shp及geotiff进行数据集切片工具创造了GUI界面
 
 # 环境依赖
+numpy、gdal、PyQt5、pillow、shapely、fiona、requests、pyshp、lxml、pykml、data_downloader、pandas、scipy、geopandas
 
 # 目录结构描述
     ├── README.txt           // 帮助文档
     ├── tools
         ├── color_tif.py        // float32格式的geotiff文件上色为uint8三通道RGB的geotiff工具
         ├── color_bar          // float32格式的geotiff文件上色配置文件
-        ├── cut_slice_GUI.py                      // geotiff根据shp切片工具
+        ├── cut_slice_GUI.py                      // 根据shp、geotiff进行数据集切片工具
         ├── txt_generate_shp_GUI.py        // 形变量txt文件生成point格式shp工具
         ├── tifmode2.py           // geotiff去众数工具
         ├── get_height.py        // DEM输入坐标获取高程
