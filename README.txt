@@ -1,20 +1,20 @@
-# 项目介绍
-InSAR数据处理中用到的一些自制工具、其中使用形变量txt生成shp工具和根据shp及geotiff进行数据集切片工具创造了GUI界面
+# Introduction
+Some of the homemade tools used in InSAR data processing, including the shp generation tool using the form variable txt and the data set slicing tool based on shp and geotiff created the GUI interface
 
-# 环境依赖
+# requirements
 numpy、gdal、PyQt5、pillow、shapely、fiona、requests、pyshp、lxml、pykml、data_downloader、pandas、scipy、geopandas
 
-# 目录结构描述
-    ├── README.txt           // 帮助文档
+# Directory structure description
+    ├── README.txt           // Help document
     ├── tools
-        ├── color_tif.py        // float32格式的geotiff文件上色为uint8三通道RGB的geotiff工具
-        ├── color_bar          // float32格式的geotiff文件上色配置文件
-        ├── cut_slice_GUI.py                      // 根据shp、geotiff进行数据集切片工具
-        ├── txt_generate_shp_GUI.py        // 形变量txt文件生成point格式shp工具
-        ├── tifmode2.py           // geotiff去众数工具
-        ├── get_height.py        // DEM输入坐标获取高程
-        ├── dem_download_use_shp.py        // 根据shp输入下载相应地区DEM工具
-        ├── SAR_orbit_download_use_Path_Frame.py        // 根据Path、Frame输入下载相应地区哨兵一号影像及精密轨道数据工具
-        ├── geotif_shp_generate_mask_bmp.py        // 根据输入geotiff和shp生成掩膜bmp
-        ├── geotif_shp_generate_mask_tif.py           // 根据输入geotiff和shp生成掩膜geotiff
-        ├── auto_refpoint_choose.py                       // 根据输入shp区域和cc_ad.tif选择参考点经纬度
+        ├── color_tif.py                                  // float32 format geotiff files are colored with uint8 tri-channel RGB geotiff tool
+        ├── color_bar                                     // float32 format geotiff file coloring configuration file(Can be modified as needed)
+        ├── cut_slice_GUI.py                             // Data set slicing tool according to shp, geotiff
+        ├── txt_generate_shp_GUI.py                      // Form variable txt file generated point format shp tool
+        ├── tifmode2.py                                  // geotiff demode tool
+        ├── get_height.py                                // DEM input coordinates to get elevation
+        ├── dem_download_use_shp.py                     // Download the DEM tool for the corresponding region according to the shp input
+        ├── SAR_orbit_download_use_Path_Frame.py        // Download Sentinel-1 image and precision orbit data tool for the corresponding area according to Path and Frame input
+        ├── geotif_shp_generate_mask_bmp.py             // Generate mask BMP based on input geotiff and shp
+        ├── geotif_shp_generate_mask_tif.py             // Generate mask geotiff based on input geotiff and shp
+        ├── auto_refpoint_choose.py                     // Select the latitude and longitude of the reference point based on the shp region and cc_ad.tif
