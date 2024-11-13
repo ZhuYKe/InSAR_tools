@@ -61,7 +61,7 @@ if __name__ == "__main__":
         print("请按格式输入")
         print("<script_name> <cc_ad> <mask> <out_path>")
         print("cc_ad：cc_ad.tif")
-        print("mask：Mask区域 ( .shp - )")
+        print("mask：Mask区域 (.shp 或 - )")
         print("out_path：记录文件输出路径")
         sys.exit(1)
 
