@@ -17,3 +17,4 @@ numpy、gdal、PyQt5、pillow、shapely、fiona、requests、pyshp、lxml、pykm
         ├── SAR_orbit_download_use_Path_Frame.py        // 根据Path、Frame输入下载相应地区哨兵一号影像及精密轨道数据工具
         ├── geotif_shp_generate_mask_bmp.py        // 根据输入geotiff和shp生成掩膜bmp
         ├── geotif_shp_generate_mask_tif.py           // 根据输入geotiff和shp生成掩膜geotiff
+        ├── auto_refpoint_choose.py                       // 根据输入shp区域和cc_ad.tif选择参考点经纬度
