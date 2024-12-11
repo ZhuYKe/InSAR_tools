@@ -45,13 +45,17 @@ def get_value(shp_file, image_path):
             print(f"Avg_disp：{avg_value:.5f} Min_disp：{min_value:.5f} Max_disp：{max_value:.5f}")
 
 
-def get_value_and_update_shp(shp_file, image_path, output_shp_file):
+def get_value_and_update_shp(shp_file, image_path, key_word, output_shp_file):
 
     with fiona.open(shp_file, 'r') as shp:
         schema = shp.schema.copy()
-        schema['properties']['Avg_disp'] = 'float'
-        schema['properties']['Min_disp'] = 'float'
-        schema['properties']['Max_disp'] = 'float'
+
+        new_fields = [f'{key_word}_Avg_disp', f'{key_word}_Min_disp', f'{key_word}_Max_disp']
+        for field in new_fields:
+            if field in schema['properties']:
+                pass
+            else:
+                schema['properties'][field] = 'float'
 
         with fiona.open(output_shp_file, 'w', driver='ESRI Shapefile', schema=schema, crs=shp.crs) as output:
             for feature in shp:
@@ -81,16 +85,18 @@ def get_value_and_update_shp(shp_file, image_path, output_shp_file):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 4:
         print("请按格式输入")
-        print("<script_name> <ori_shp> <ref_geotiff> <output_shp>")
+        print("<script_name> <ori_shp> <ref_geotiff> <key_word> <output_shp>")
         print("ori_shp：原始shp")
-        print("ref_geotiff：参考disp_map_geotiff")
+        print("ref_geotiff：disp_map_geotiff形变量参考影像")
+        print("key_word: 形变量文件类型关键字(stacking、2pass、SBAS等)")
         print("output_shp：添加形变量字段的输出shp")
         sys.exit(1)
     ori_shp = sys.argv[1]
     ref_geotiff = sys.argv[2]
-    output_shp = sys.argv[3]
+    keyword = sys.argv[3]
+    output_shp = sys.argv[4]
 
     get_value(ori_shp, ref_geotiff)
-    get_value_and_update_shp(ori_shp, ref_geotiff, output_shp)
+    get_value_and_update_shp(ori_shp, ref_geotiff, keyword, output_shp)
