@@ -71,13 +71,13 @@ def get_value_and_update_shp(shp_file, image_path, key_word, output_shp_file):
                     max_value = np.nanmax(image_values)
                     min_value = np.nanmin(image_values)
 
-                    feature['properties']['Avg_disp'] = float(avg_value)
-                    feature['properties']['Min_disp'] = float(min_value)
-                    feature['properties']['Max_disp'] = float(max_value)
+                    feature['properties'][f'{key_word}_Avg_disp'] = float(avg_value)
+                    feature['properties'][f'{key_word}_Min_disp'] = float(min_value)
+                    feature['properties'][f'{key_word}_Max_disp'] = float(max_value)
+                    print(f"Polygon {str(int(feature['id']) + 1)} 已添加")
                 else:
-                    feature['properties']['Avg_disp'] = None
-                    feature['properties']['Min_disp'] = None
-                    feature['properties']['Max_disp'] = None
+                    print(f"Polygon {str(int(feature['id']) + 1)} geotiff对应区域无有效值 未添加")
+
 
                 output.write(feature)
 
@@ -98,5 +98,5 @@ if __name__ == "__main__":
     keyword = sys.argv[3]
     output_shp = sys.argv[4]
 
-    get_value(ori_shp, ref_geotiff)
+    # get_value(ori_shp, ref_geotiff)
     get_value_and_update_shp(ori_shp, ref_geotiff, keyword, output_shp)
