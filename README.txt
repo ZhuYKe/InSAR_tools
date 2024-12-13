@@ -18,4 +18,4 @@ numpy、gdal、PyQt5、pillow、shapely、fiona、requests、pyshp、lxml、pykm
         ├── geotif_shp_generate_mask_bmp.py             // Generate mask BMP based on input geotiff and shp
         ├── geotif_shp_generate_mask_tif.py             // Generate mask geotiff based on input geotiff and shp
         ├── auto_refpoint_choose.py                     // Select the latitude and longitude of the reference point based on the shp region and cc_ad.tif
-        ├── update_shp_geotiff_disp.py                  // upddate disp information in shpfile form dispmap geotiff
+        ├── update_shp_geotiff_value.py                  // insert/upddate field information in shpfile element from geotiff
