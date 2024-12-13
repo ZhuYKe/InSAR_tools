@@ -27,7 +27,7 @@ def get_image_values(image_path, bounds):
     return data
 
 
-def get_value_and_update_shp(shp_file, image_path, name, output_shp_file):
+def get_value_and_update_shp(shp_file, image_path, name, output_shp_file, value_choose):
 
     with fiona.open(shp_file, 'r') as shp:
         schema = shp.schema.copy()
@@ -52,9 +52,16 @@ def get_value_and_update_shp(shp_file, image_path, name, output_shp_file):
                     avg_value = np.nanmean(image_values)
                     max_value = np.nanmax(image_values)
                     min_value = np.nanmin(image_values)
-
-                    feature['properties'][f'{name}'] = float(avg_value)
-                    print(f"要素{str(int(feature['id'])+1)} {name}字段 更新为{float(avg_value)}")
+					
+                    if value_choose == "1":
+                        value = max_value
+                    elif value_choose == "2":
+                        value = min_value
+                    else:
+                        value = avg_value
+			
+                    feature['properties'][f'{name}'] = float(value)
+                    print(f"要素{str(int(feature['id'])+1)} {name}字段 更新为{float(value)}")
                 else:
                     print(f"要素{str(int(feature['id'])+1)} 对应参考geotiff区域无有效值 {name}字段未更新")
                 output.write(feature)
@@ -63,17 +70,19 @@ def get_value_and_update_shp(shp_file, image_path, name, output_shp_file):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         print("请按格式输入")
-        print("<script_name> <ori_shp> <ref_geotiff> <key_word> <output_shp>")
+        print("<script_name> <ori_shp> <ref_geotiff> <key_word> <output_shp> <value_choose>")
         print("ori_shp：输入shp")
         print("ref_geotiff：参考影像geotiff")
-        print("key_word: 待更新（添加）信息的字段名")
-        print("output_shp：更新（添加）信息字段信息的输出shp")
+        print("key_word: 待更新（添加）要素范围内信息的字段名")
+        print("output_shp：更新（添加）字段信息的输出shp")
+        print("value_choose: 更新（添加）字段内的值选择 0：要素范围内平均值 1：要素范围内最大值 2：要素范围内最小值")
         sys.exit(1)
     ori_shp = sys.argv[1]
     ref_geotiff = sys.argv[2]
     name = sys.argv[3]
     output_shp = sys.argv[4]
+    value_choose = sys.argv[5]
 
-    get_value_and_update_shp(ori_shp, ref_geotiff, name, output_shp)
+    get_value_and_update_shp(ori_shp, ref_geotiff, name, output_shp, value_choose)
