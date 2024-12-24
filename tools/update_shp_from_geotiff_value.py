@@ -61,7 +61,7 @@ def get_value_and_update_shp(shp_file, image_path, name, output_shp_file, value_
         if field in schema['properties']:
             print(f"已有字段{name} 更新信息")
         else:
-            schema['properties'][field] = 'float'
+            schema['properties'][field] = 'string'
             print(f"添加新字段{name}")
 
         with fiona.open(output_shp_file, 'w', driver='ESRI Shapefile', schema=schema, crs=shp.crs) as output:
@@ -91,7 +91,7 @@ def get_value_and_update_shp(shp_file, image_path, name, output_shp_file, value_
                     else:
                         value = avg_value
 
-                    feature['properties'][f'{name}'] = float(value)
+                    feature['properties'][f'{name}'] = str(value)
                     print(f"要素{str(int(feature['id']) + 1)} {name}字段 更新为{float(value)}")
                 else:
                     print(f"要素{str(int(feature['id']) + 1)} 对应参考geotiff区域无有效值 {name}字段未更新")
